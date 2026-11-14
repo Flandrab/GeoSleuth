@@ -1,101 +1,101 @@
 [
-    {
-      "id": "t2m",
-      "name": "Air temperature",
-      "topic": "heat",
-      "definition": "How warm the air is about 2 m above the ground, averaged over the month.",
-      "why_it_matters": "Warmer air means more heat stress for people, crops and water supplies.",
-      "unit": "°C",
-      "mission": "NASA POWER (based on the MERRA-2 model)",
-      "source": "power",
-      "source_param": "T2M"
-    },
-    {
-      "id": "t2m_max",
-      "name": "Hottest temperature of the month",
-      "topic": "heat",
-      "definition": "The highest air temperature reached during the month, about 2 m above the ground.",
-      "why_it_matters": "Hotter peaks mean more dangerous heatwaves, wildfire risk and stress on crops.",
-      "unit": "°C",
-      "mission": "NASA POWER (based on the MERRA-2 model)",
-      "source": "power",
-      "source_param": "T2M_MAX"
-    },
-    {
-      "id": "t2m_min",
-      "name": "Coldest temperature of the month",
-      "topic": "heat",
-      "definition": "The lowest air temperature reached during the month, about 2 m above the ground.",
-      "why_it_matters": "Milder cold extremes mean fewer frosts, which affects crops, pests and snow.",
-      "unit": "°C",
-      "mission": "NASA POWER (based on the MERRA-2 model)",
-      "source": "power",
-      "source_param": "T2M_MIN"
-    },
-    {
-      "id": "precip",
-      "name": "Precipitation",
-      "topic": "water",
-      "definition": "How much rain and snow falls, in millimetres per day.",
-      "why_it_matters": "Changes in rain affect drinking water, farming and flood risk.",
-      "unit": "mm/day",
-      "mission": "NASA POWER",
-      "source": "power",
-      "source_param": "PRECTOTCORR"
-    },
-    {
-      "id": "humidity",
-      "name": "Air humidity",
-      "topic": "water",
-      "definition": "How much water vapour is in the air, as a percentage of the most it could hold.",
-      "why_it_matters": "Humidity affects how hot it feels, plant growth and the spread of some diseases.",
-      "unit": "%",
-      "mission": "NASA POWER (based on the MERRA-2 model)",
-      "source": "power",
-      "source_param": "RH2M"
-    },
-    {
-      "id": "soil_root",
-      "name": "Soil moisture (root zone)",
-      "topic": "water",
-      "definition": "How wet the soil is where plant roots grow, from 0 (completely dry) to 1 (fully wet).",
-      "why_it_matters": "Drier soil means thirstier crops and a higher risk of drought.",
-      "unit": "0–1",
-      "mission": "NASA POWER (based on the MERRA-2 model)",
-      "source": "power",
-      "source_param": "GWETROOT"
-    },
-    {
-      "id": "soil_top",
-      "name": "Soil moisture (surface)",
-      "topic": "water",
-      "definition": "How wet the top layer of soil is, from 0 (completely dry) to 1 (fully wet).",
-      "why_it_matters": "The surface dries out first, so it is an early sign of drought.",
-      "unit": "0–1",
-      "mission": "NASA POWER (based on the MERRA-2 model)",
-      "source": "power",
-      "source_param": "GWETTOP"
-    },
-    {
-      "id": "wind",
-      "name": "Wind speed",
-      "topic": "air",
-      "definition": "How fast the wind blows about 2 m above the ground.",
-      "why_it_matters": "Wind affects wildfire spread, air pollution and wind energy.",
-      "unit": "m/s",
-      "mission": "NASA POWER (based on the MERRA-2 model)",
-      "source": "power",
-      "source_param": "WS2M"
-    },
-    {
-      "id": "solar",
-      "name": "Sunlight reaching the ground",
-      "topic": "heat",
-      "definition": "How much energy from the Sun reaches the ground each day.",
-      "why_it_matters": "More or less sunlight changes temperatures, crops and solar power output.",
-      "unit": "MJ/m²/day",
-      "mission": "NASA POWER (based on CERES satellite data)",
-      "source": "power",
-      "source_param": "ALLSKY_SFC_SW_DWN"
-    }
-  ]
+  {
+    "id": "t2m",
+    "name": "Air temperature",
+    "topic": "heat",
+    "definition": "How warm the air is about 2 m above the ground, averaged over the month.",
+    "why_it_matters": "Warmer air means more heat stress for people, crops and water supplies.",
+    "unit": "°C",
+    "mission": "NASA POWER (based on the MERRA-2 model)",
+    "source": "power",
+    "source_param": "T2M"
+  },
+  {
+    "id": "t2m_max",
+    "name": "Hottest temperature of the month",
+    "topic": "heat",
+    "definition": "The highest air temperature reached during the month, about 2 m above the ground.",
+    "why_it_matters": "Hotter peaks mean more dangerous heatwaves, wildfire risk and stress on crops.",
+    "unit": "°C",
+    "mission": "NASA POWER (based on the MERRA-2 model)",
+    "source": "power",
+    "source_param": "T2M_MAX"
+  },
+  {
+    "id": "t2m_min",
+    "name": "Coldest temperature of the month",
+    "topic": "heat",
+    "definition": "The lowest air temperature reached during the month, about 2 m above the ground.",
+    "why_it_matters": "Milder cold extremes mean fewer frosts, which affects crops, pests and snow.",
+    "unit": "°C",
+    "mission": "NASA POWER (based on the MERRA-2 model)",
+    "source": "power",
+    "source_param": "T2M_MIN"
+  },
+  {
+    "id": "precip",
+    "name": "Precipitation",
+    "topic": "water",
+    "definition": "How much rain and snow falls, in millimetres per day.",
+    "why_it_matters": "Changes in rain affect drinking water, farming and flood risk.",
+    "unit": "mm/day",
+    "mission": "NASA POWER",
+    "source": "power",
+    "source_param": "PRECTOTCORR"
+  },
+  {
+    "id": "humidity",
+    "name": "Air humidity",
+    "topic": "water",
+    "definition": "How much water vapour is in the air, as a percentage of the most it could hold.",
+    "why_it_matters": "Humidity affects how hot it feels, plant growth and the spread of some diseases.",
+    "unit": "%",
+    "mission": "NASA POWER (based on the MERRA-2 model)",
+    "source": "power",
+    "source_param": "RH2M"
+  },
+  {
+    "id": "soil_root",
+    "name": "Soil moisture (root zone)",
+    "topic": "water",
+    "definition": "How wet the soil is where plant roots grow, from 0 (completely dry) to 1 (fully wet).",
+    "why_it_matters": "Drier soil means thirstier crops and a higher risk of drought.",
+    "unit": "0–1",
+    "mission": "NASA POWER (based on the MERRA-2 model)",
+    "source": "power",
+    "source_param": "GWETROOT"
+  },
+  {
+    "id": "soil_top",
+    "name": "Soil moisture (surface)",
+    "topic": "water",
+    "definition": "How wet the top layer of soil is, from 0 (completely dry) to 1 (fully wet).",
+    "why_it_matters": "The surface dries out first, so it is an early sign of drought.",
+    "unit": "0–1",
+    "mission": "NASA POWER (based on the MERRA-2 model)",
+    "source": "power",
+    "source_param": "GWETTOP"
+  },
+  {
+    "id": "wind",
+    "name": "Wind speed",
+    "topic": "air",
+    "definition": "How fast the wind blows about 2 m above the ground.",
+    "why_it_matters": "Wind affects wildfire spread, air pollution and wind energy.",
+    "unit": "m/s",
+    "mission": "NASA POWER (based on the MERRA-2 model)",
+    "source": "power",
+    "source_param": "WS2M"
+  },
+  {
+    "id": "solar",
+    "name": "Sunlight reaching the ground",
+    "topic": "heat",
+    "definition": "How much energy from the Sun reaches the ground each day.",
+    "why_it_matters": "More or less sunlight changes temperatures, crops and solar power output.",
+    "unit": "MJ/m²/day",
+    "mission": "NASA POWER (based on CERES satellite data)",
+    "source": "power",
+    "source_param": "ALLSKY_SFC_SW_DWN"
+  }
+]

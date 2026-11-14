@@ -1,0 +1,27 @@
+[
+    {
+      "id": "prishtina_heat",
+      "title": "Prishtina: warming that stands out",
+      "type": "single",
+      "variable_id": "t2m",
+      "place": {"name": "Prishtina, Kosovo", "lat": 42.66, "lon": 21.17},
+      "story": "Average air temperature in Prishtina has risen steadily since 2001. This case shows the year when the warming became larger than the normal ups and downs from one year to the next."
+    },
+    {
+      "id": "prishtina_extremes",
+      "title": "Extremes take longer to stand out",
+      "type": "single",
+      "variable_id": "t2m_max",
+      "place": {"name": "Prishtina, Kosovo", "lat": 42.66, "lon": 21.17},
+      "story": "The hottest temperature of each month changes much more from year to year than the monthly average. So even when both are rising, a change in extremes needs more years before it clearly stands out. Compare this case with the first one."
+    },
+    {
+      "id": "rome_vs_prishtina",
+      "title": "Same warming, different pace: Rome and Prishtina",
+      "type": "compare",
+      "variable_id": "t2m",
+      "place_a": {"name": "Rome, Italy", "lat": 41.90, "lon": 12.50},
+      "place_b": {"name": "Prishtina, Kosovo", "lat": 42.66, "lon": 21.17},
+      "story": "Both cities are warming, but not at the same speed. Inland places like Prishtina can warm faster than places near the sea, because the sea slows down temperature changes."
+    }
+  ]
