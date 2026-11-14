@@ -1,3 +1,4 @@
+import math
 import sys
 from pathlib import Path
 
@@ -35,8 +36,19 @@ def test_seasons_removed():
     r = analyze(make_series(0.0, 0.0))
     assert max(abs(v) for v in r["annual_anomaly"]) < 0.01
 
+
 def test_p_value_is_never_nan():
-    import math
     for trend in (0.0, 0.02, 0.05, 0.1):
         r = analyze(make_series(trend, 0.3, seed=3))
         assert math.isfinite(r["p_value"])
+
+
+def test_strong_trend_is_robust():
+    r = analyze(make_series(0.08, 0.3))
+    assert r["robust"] is True
+    assert list(r["robust_statuses"]) == [2001, 2002, 2003, 2004, 2005, 2006]
+
+
+def test_robustness_can_be_skipped():
+    r = analyze(make_series(0.05, 0.3), check_robustness=False)
+    assert r["robust"] is None
