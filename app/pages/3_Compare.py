@@ -71,7 +71,14 @@ def normalize_lon(lon):
 
 
 catalog = load_catalog()
-var = st.selectbox("Variable", catalog, format_func=lambda v: v["name"])
+ids = [v["id"] for v in catalog]
+default_var = st.session_state.get("cmp_variable_id", "t2m")
+var = st.selectbox(
+    "Variable",
+    catalog,
+    index=ids.index(default_var) if default_var in ids else 0,
+    format_func=lambda v: v["name"],
+)
 
 # --- Choose which place to set ---
 target = st.radio("Set which place?", ["Place A", "Place B"], horizontal=True)
