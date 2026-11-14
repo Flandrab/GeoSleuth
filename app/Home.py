@@ -8,7 +8,7 @@ import streamlit as st
 from streamlit_folium import st_folium
 
 st.set_page_config(page_title="GeoSleuth", page_icon="🔍", layout="wide")
-st.title("🔍 GeoSleuth")
+st.title(" GeoSleuth")
 st.subheader("When does climate change become undeniable where you live?")
 st.write(
     "Pick a place, and GeoSleuth scans 24 years of NASA data to show which changes have "
@@ -38,8 +38,8 @@ if out and out.get("last_clicked"):
 st.write(f"Selected: {st.session_state.get('place_name', 'Prishtina')} "
          f"({st.session_state.get('lat', lat):.2f}, {st.session_state.get('lon', lon):.2f})")
  
-TOPICS = {"🌡 Heat": "heat", "💧 Water": "water", "🌬 Air": "air"}
-chosen = st.multiselect("What do you care about?", list(TOPICS), default=["🌡 Heat", "💧 Water"])
+TOPICS = {"🌡 Heat": "heat", " Water": "water", "🌬 Air": "air"}
+chosen = st.multiselect("What do you care about?", list(TOPICS), default=["🌡 Heat", " Water"])
 
 if st.button("Start investigation", type="primary", disabled=not chosen):
     st.session_state["topics"] = [TOPICS[c] for c in chosen]

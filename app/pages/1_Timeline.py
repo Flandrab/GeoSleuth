@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-sys.path.append(str(Path(file).resolve().parents[2]))
+sys.path.append(str(Path(__file__).resolve().parents[2]))
 
 import streamlit as st
 
@@ -38,7 +38,7 @@ for row in results:
     c1, c2, c3, c4 = st.columns([3, 3, 2, 1.4])
     c1.markdown(f"{ICON[row['status']]} {row['name']}")
     c2.markdown(verdict)
-    c3.markdown(f"{row['slope_perdecade']:+.2f} {row['unit']}/decade")
+    c3.markdown(f"{row['slope_per_decade']:+.2f} {row['unit']}/decade")
     if c4.button("Investigate", key=f"inv{row['variable_id']}"):
         st.session_state["variable_id"] = row["variable_id"]
         st.switch_page("pages/2_Investigate.py")
