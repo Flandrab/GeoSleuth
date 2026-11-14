@@ -34,3 +34,9 @@ def test_no_trend_does_not_emerge():
 def test_seasons_removed():
     r = analyze(make_series(0.0, 0.0))
     assert max(abs(v) for v in r["annual_anomaly"]) < 0.01
+
+def test_p_value_is_never_nan():
+    import math
+    for trend in (0.0, 0.02, 0.05, 0.1):
+        r = analyze(make_series(trend, 0.3, seed=3))
+        assert math.isfinite(r["p_value"])

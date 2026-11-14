@@ -24,11 +24,13 @@ def analyze(series):
     n = len(y)
     idx = np.arange(n)
 
-    # 1. Trend + significance: Mann-Kendall with Hamed-Rao autocorrelation correction
-    mkr = mk.hamed_rao_modification_test(y)
-    slope = float(mkr.slope)               # Sen's slope, per year
-    p_value = float(mkr.p)
-    trend_line = mkr.intercept + slope * idx
+    # 1. Trend size: Sen's slope (per year)
+    sen = mk.sens_slope(y)
+    slope = float(sen.slope)
+    trend_line = sen.intercept + slope * idx
+    p_value = float(mk.trend_free_pre_whitening_modification_test(y).p)
+    if not np.isfinite(p_value):
+        p_value = float(mk.original_test(y).p)
 
     # 2. OLS t-test + 95% confidence interval for the slope
     ols = st.linregress(idx, y)
