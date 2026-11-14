@@ -10,6 +10,12 @@ from src.catalog import load_catalog
 from src.data import get_series
 from src.stats import analyze
 
+
+def format_p(p):
+    """Show very small p-values as '< 0.001' instead of '0.000'."""
+    return "< 0.001" if p < 0.001 else f"{p:.3f}"
+
+
 st.title("Investigate")
 
 catalog = load_catalog()
@@ -80,11 +86,29 @@ else:
     st.info(f"**No clear signal.** {var['name']} shows no clear long-term change here.")
 
 m1, m2, m3 = st.columns(3)
-m1.metric("Rate of change", f"{slope:+.2f} {unit} / decade")
-m2.metric("95% range", f"{lo:+.2f} to {hi:+.2f}")
-m3.metric("Chance it's random (p)", f"{r['p_value']:.3f}")
+m1.metric(f"Rate of change ({unit} per decade)", f"{slope:+.2f}")
+m2.metric(f"95% range ({unit} per decade)", f"{lo:+.2f} to {hi:+.2f}")
+m3.metric("Chance it's random (p)", format_p(r["p_value"]))
+
+# --- Robustness check ---
+if r["robust"] is not None:
+    years_checked = list(r["robust_statuses"])
+    span = f"{years_checked[0]} to {years_checked[-1]}"
+    if r["robust"]:
+        st.write(
+            f"**Robustness check: passed.** The verdict stays the same when the analysis "
+            f"starts in any year from {span}."
+        )
+    else:
+        changed = [str(yr) for yr, s in r["robust_statuses"].items() if s != r["status"]]
+        st.write(
+            f"**Robustness check: not passed.** The verdict changes when the analysis starts "
+            f"in {', '.join(changed)}. Treat this result with care."
+        )
+
 st.caption(
     "Method: seasons removed, then the Mann–Kendall test with trend-free pre-whitening "
     "(Yue et al., 2002) to account for autocorrelation. 'Emerged' = significant (p < 0.05) "
-    "and the trend is more than twice the normal year-to-year variation."
+    "and the trend is more than twice the normal year-to-year variation. Robustness: the "
+    "analysis is repeated with start years shifted by up to 5 years."
 )
