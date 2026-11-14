@@ -10,7 +10,7 @@ from src.catalog import load_catalog
 from src.data import get_series
 from src.stats import analyze
 
-st.title(" Investigate")
+st.title("Investigate")
 
 catalog = load_catalog()
 ids = [v["id"] for v in catalog]
@@ -29,12 +29,9 @@ with st.spinner("Loading NASA data..."):
     series = get_series(var["id"], lat, lon)
 r = analyze(series)
 
-st.caption(
-    "Method: seasons removed, then the Mann–Kendall test with trend-free pre-whitening "
-    "(Yue et al., 2002) to account for autocorrelation. 'Emerged' = significant (p < 0.05) "
-    "and the trend is more than twice the normal year-to-year variation."
-)
+st.caption(f"{var['definition']} Source: {var['mission']}.")
 
+# --- Chart: yearly anomalies, trend, natural-variation band, emergence year ---
 base = r["trend_line"][0]
 band = 2 * r["noise_sigma"]
 fig = go.Figure()
@@ -62,7 +59,7 @@ fig.update_layout(
 )
 st.plotly_chart(fig, use_container_width=True)
 
-
+# --- Verdict card ---
 unit = var["unit"]
 slope = r["slope_per_decade"]
 lo, hi = r["ci95"]
@@ -87,7 +84,7 @@ m1.metric("Rate of change", f"{slope:+.2f} {unit} / decade")
 m2.metric("95% range", f"{lo:+.2f} to {hi:+.2f}")
 m3.metric("Chance it's random (p)", f"{r['p_value']:.3f}")
 st.caption(
-    "Method: seasons removed, then Mann–Kendall test with Hamed–Rao correction for "
-    "autocorrelation. 'Emerged' = significant (p < 0.05) and the trend is more than "
-    "twice the normal year-to-year variation."
+    "Method: seasons removed, then the Mann–Kendall test with trend-free pre-whitening "
+    "(Yue et al., 2002) to account for autocorrelation. 'Emerged' = significant (p < 0.05) "
+    "and the trend is more than twice the normal year-to-year variation."
 )
