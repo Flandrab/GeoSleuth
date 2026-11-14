@@ -29,9 +29,12 @@ with st.spinner("Loading NASA data..."):
     series = get_series(var["id"], lat, lon)
 r = analyze(series)
 
-st.caption(f"{var['definition']} Source: {var['mission']}.")
+st.caption(
+    "Method: seasons removed, then the Mann–Kendall test with trend-free pre-whitening "
+    "(Yue et al., 2002) to account for autocorrelation. 'Emerged' = significant (p < 0.05) "
+    "and the trend is more than twice the normal year-to-year variation."
+)
 
-# --- Chart: yearly anomalies, trend, natural-variation band, emergence year ---
 base = r["trend_line"][0]
 band = 2 * r["noise_sigma"]
 fig = go.Figure()
