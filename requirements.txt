@@ -1,0 +1,13 @@
+streamlit
+pandas
+numpy
+scipy
+plotly
+streamlit-folium
+folium
+requests
+pyarrow
+pymannkendall
+statsmodels
+anthropic
+pytest
