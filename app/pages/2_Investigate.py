@@ -3,11 +3,13 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
+import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
 from src.catalog import load_catalog
 from src.data import get_series
+from src.sonify import describe_sound, listening_guide, outside_band, sonify
 from src.stats import analyze
 
 
@@ -64,6 +66,29 @@ fig.update_layout(
     height=450, margin=dict(t=30),
 )
 st.plotly_chart(fig, use_container_width=True)
+
+# --- Text alternative to the chart: the same numbers as a table ---
+outside = (outside_band(r["annual_anomaly"], r["trend_line"], r["noise_sigma"])
+           or [False] * len(r["years"]))
+with st.expander("Show the chart as a table"):
+    st.table(pd.DataFrame({
+        "Year": [str(y) for y in r["years"]],
+        f"Difference from average ({var['unit']})": [f"{v:+.2f}" for v in r["annual_anomaly"]],
+        f"Trend ({var['unit']})": [f"{v:+.2f}" for v in r["trend_line"]],
+        "Outside natural variation": ["Yes" if o else "No" for o in outside],
+    }))
+
+# --- Listen to the trend (guide first, so screen readers read it before the player) ---
+st.subheader("Listen to the trend")
+st.write(listening_guide(r["years"], r["emergence_year"], has_band=r["noise_sigma"] > 0))
+st.audio(
+    sonify(r["years"], r["annual_anomaly"], r["emergence_year"], r["trend_line"], r["noise_sigma"]),
+    format="audio/wav",
+)
+st.write(describe_sound(
+    r["years"], r["annual_anomaly"], r["emergence_year"], r["trend_line"], r["noise_sigma"],
+    unit=var["unit"],
+))
 
 # --- Verdict card ---
 unit = var["unit"]
