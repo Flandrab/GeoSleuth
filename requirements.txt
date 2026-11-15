@@ -8,6 +8,4 @@ folium
 requests
 pyarrow
 pymannkendall
-statsmodels
-anthropic
 pytest
