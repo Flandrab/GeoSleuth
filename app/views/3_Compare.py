@@ -117,15 +117,35 @@ for col, (letter, p, color) in zip(cols, places):
     )
 
 # --- Explain what the comparison shows ---
-sa = results["A"]["slope_per_decade"]
-sb = results["B"]["slope_per_decade"]
+# Only claim a direction when the trend is real (emerged or emerging), not when it is just noise.
+def has_trend(r):
+    return r["status"] in ("emerged", "emerging")
+
+
+ra, rb = results["A"], results["B"]
+sa, sb = ra["slope_per_decade"], rb["slope_per_decade"]
+ta, tb = has_trend(ra), has_trend(rb)
 note = None
-if sa * sb < 0:
-    note = (f"**Opposite directions.** {var['name']} is going up in one place and down in the other. "
-            "A warming climate shifts winds, storm tracks and rainfall, so its effects are uneven.")
-elif results["A"]["status"] != results["B"]["status"]:
-    note = ("**Same direction, different certainty.** The change is clearer in one place than "
-            "the other, because natural year-to-year variation differs from place to place.")
+if ta and tb:
+    if sa * sb < 0:
+        note = (f"**Opposite directions.** {var['name']} is going up in one place and down in the "
+                "other. A warming climate shifts winds, storm tracks and rainfall, so its effects "
+                "are uneven.")
+    elif ra["status"] != rb["status"]:
+        note = ("**Same direction, different certainty.** Both places are changing the same way, "
+                "but the change is clearer in one than the other, because natural year-to-year "
+                "variation differs from place to place.")
+elif ta or tb:
+    strong, weak = (a, b) if ta else (b, a)
+    note = (f"**Clear in one place only.** {var['name']} shows a trend in {strong['name']}, but in "
+            f"{weak['name']} the change cannot be told apart from normal year-to-year variation.")
+    if sa * sb < 0:
+        note += (" The two lines point in different directions, but that is not evidence of "
+                 "opposite trends.")
+else:
+    note = (f"**No clear signal in either place.** Neither place shows a change in {var['name'].lower()} "
+            "that stands out from normal year-to-year variation. The lines may point different ways, "
+            "but both are within what random ups and downs can produce.")
 if note:
     st.space("small")
     st.markdown(note)
