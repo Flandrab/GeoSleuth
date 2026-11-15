@@ -42,6 +42,11 @@ def scan_region(lat, lon, topics=None):
             "projected_year": r["projected_year"],
             "slope_per_decade": r["slope_per_decade"],
             "p_value": r["p_value"],
+            # for the small charts on the Trend scanner page
+            "years": r["years"],
+            "annual_anomaly": r["annual_anomaly"],
+            "trend_line": r["trend_line"],
+            "noise_sigma": r["noise_sigma"],
         })
 
     if results:

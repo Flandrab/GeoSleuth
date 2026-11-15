@@ -1,49 +1,27 @@
 import sys
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))
+APP = Path(__file__).resolve().parent
+sys.path.append(str(APP.parent))
 
-import folium
 import streamlit as st
-from streamlit_folium import st_folium
 
-st.set_page_config(page_title="GeoSleuth", layout="wide")
-st.title("GeoSleuth")
-st.subheader("When does climate change become undeniable where you live?")
-st.write(
-    "Pick a place, and GeoSleuth scans 24 years of NASA data to show which changes have "
-    "already stood out from normal year-to-year variation, and which are still hidden."
+st.set_page_config(
+    page_title="GeoSleuth",
+    page_icon=str(APP / "static" / "icon.svg"),
+    layout="wide",
 )
+st.logo(str(APP / "static" / "logo.svg"), icon_image=str(APP / "static" / "icon.svg"), size="large")
 
-# --- quick picks ---
-PLACES = {"Prishtina": (42.66, 21.17), "Tirana": (41.33, 19.82)}
-cols = st.columns(len(PLACES) + 1)
-for col, (name, (plat, plon)) in zip(cols, PLACES.items()):
-    if col.button(name):
-        st.session_state.update(lat=plat, lon=plon, place_name=name)
-
-# --- map ---
-lat = st.session_state.get("lat", 42.66)
-lon = st.session_state.get("lon", 21.17)
-m = folium.Map(location=[lat, lon], zoom_start=6)
-folium.Marker([lat, lon], tooltip="Selected place").add_to(m)
-out = st_folium(m, height=420, width=900, key="map")
-
-if out and out.get("last_clicked"):
-    new_lat = round(out["last_clicked"]["lat"], 2)
-    new_lon = round(out["last_clicked"]["lng"], 2)
-    if (new_lat, new_lon) != (lat, lon):
-        st.session_state.update(lat=new_lat, lon=new_lon,
-                                place_name=f"{new_lat:.2f}, {new_lon:.2f}")
-        st.rerun()
-
-st.write(f"**Selected:** {st.session_state.get('place_name', 'Prishtina')} "
-         f"({st.session_state.get('lat', lat):.2f}, {st.session_state.get('lon', lon):.2f})")
-
-# --- topics ---
-TOPICS = {"Heat": "heat", "Water": "water", "Air": "air"}
-chosen = st.multiselect("What do you care about?", list(TOPICS), default=["Heat", "Water"])
-
-if st.button("Start investigation", type="primary", disabled=not chosen):
-    st.session_state["topics"] = [TOPICS[c] for c in chosen]
-    st.switch_page("pages/1_Timeline.py")
+# Top navigation. Page files live in app/views/ (not app/pages/, which would switch on
+# Streamlit's older automatic navigation). A new page only shows up once it is added here.
+pages = [
+    st.Page("views/0_Home.py", title="Home", default=True),
+    st.Page("views/1_Timeline.py", title="Trend scanner"),
+    st.Page("views/2_Investigate.py", title="Investigate"),
+    st.Page("views/3_Compare.py", title="Compare"),
+    st.Page("views/4_Case_Files.py", title="Case files"),
+    st.Page("views/6_Validation.py", title="Validation"),
+    st.Page("views/5_Glossary.py", title="Glossary"),
+]
+st.navigation(pages, position="top").run()
