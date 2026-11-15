@@ -171,7 +171,7 @@ We used Claude (Anthropic) as a coding and planning assistant during the hackath
 ## Team
 
 - **Flandra Bytyqi**: data pipeline, statistics, emergence detection, validation, app pages
-- **Delvine Bekteshi**: sonification, design and front end, presentation
+- **Delvinë Bekteshi**: sonification, back end, design and front end, presentation
 
 ## References
 
